@@ -1,12 +1,15 @@
 package tp.web.mbean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 //mbean = Managed Bean du framework JSF
 
 @ManagedBean //name par defaut = "empruntMBean"
-@RequestScoped  //ou SessionScoped
+//@RequestScoped  //ou SessionScoped
+@SessionScoped
 public class EmpruntMBean {
 	
 	private Double montant;
@@ -17,9 +20,15 @@ public class EmpruntMBean {
 	
 	public String calculer() {
 		String suite=null;
-		double tauxMensuel = taux / 12;
+		if(taux<0) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					 new FacesMessage("taux negatif interdit","detail ..."));
+			return null;
+		}
+		double tauxMensuel = (taux / 100) / 12;
 		this.mensualite = 
-				this.montant * tauxMensuel / (1 - Math.pow(1.0+tauxMensuel,-this.nbMois));
+				(this.montant * tauxMensuel) / (1 - Math.pow(1.0+tauxMensuel,-this.nbMois));
+		suite="resEmprunt"; //pour rediriger (par defaut) vers resEmprunt.xhtml
 		return suite; //null (rester sur meme page) ou "pageXy" pour naviguer 
 	}
 
