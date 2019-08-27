@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/common.xhtml">
+	<ui:define name="title">virement</ui:define>
+	<ui:define name="content">
+	<h:messages globalOnly="true" styleClass="RedCssClass"  />
+	    <h:form id="f">
+	       <h:panelGrid id="subPanel_form_virement" columns="3">
+	       
+	        <h:outputLabel for="numCptDeb">compte à débiter:</h:outputLabel> 
+	        <h:selectOneMenu  id="numCptDeb"  
+	                   value="#{virementMBean.numCptDeb}" > 
+	              <f:selectItems value="#{clientComptesMBean.comptes}" var="c"
+	                        itemValue="#{c.numero}" itemLabel="[#{c.numero}] #{c.label} , #{c.solde}"/>       
+	         </h:selectOneMenu >
+	         <h:outputLabel></h:outputLabel>
+	         
+	         <h:outputLabel for="numCptCred">compte à crediter:</h:outputLabel> 
+	        <h:selectOneMenu  id="numCptCred"  
+	                   value="#{virementMBean.numCptCred}" > 
+	              <f:selectItems value="#{clientComptesMBean.comptes}" var="c"
+	                        itemValue="#{c.numero}" itemLabel="[#{c.numero}] #{c.label} , #{c.solde}"/>       
+	         </h:selectOneMenu >
+	         <h:outputLabel></h:outputLabel>
+	         
+	        <h:outputLabel for="montant">montant:</h:outputLabel> 
+	        <h:inputText id="montant" label="montant"  value="#{virementMBean.montant}" 
+	                 required="true"  >
+	                 <f:validateDoubleRange  minimum="0" maximum="999999" />
+	        </h:inputText> 
+	        <h:message styleClass="RedCssClass" for="montant" />
+	        
+	       
+	        <h:outputLabel></h:outputLabel>
+	        <h:commandButton value="effectuer virement" 
+	                         action="#{virementMBean.virement}"/>
+	        <h:outputLabel></h:outputLabel>
+	                         
+	       </h:panelGrid>
+	    </h:form>  
+	</ui:define>
+</ui:composition>
+
+</html>

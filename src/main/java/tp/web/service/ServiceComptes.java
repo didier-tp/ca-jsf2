@@ -18,6 +18,23 @@ public class ServiceComptes {
 	private Map<Long,Client> mapClients =  new HashMap<Long,Client>();
 	private Map<Long,List<Compte>> mapComptes =  new HashMap<Long,List<Compte>>();
 	
+	
+	private Compte compteOfNum(Long numCpt, List<Compte> comptes) {
+		Compte cpt=null;
+		for(Compte c: comptes) {
+			if(c.getNumero() == numCpt) { cpt = c; break; }
+		}
+		return cpt;
+	}
+	
+	public void effectuerVirementInterne(Long numClient,double montant,
+			                             Long numCptDeb,Long numCptCred) {
+		  Compte cptDeb = compteOfNum(numCptDeb , mapComptes.get(numClient));
+		  Compte cptCred= compteOfNum(numCptCred , mapComptes.get(numClient));
+		  cptDeb.setSolde(cptDeb.getSolde()-montant);
+		  cptCred.setSolde(cptCred.getSolde()+montant);
+	}
+	
 	public ServiceComptes() {
 		mapClients.put(1L,new Client(1L,"bon","jean"));
 		List<Compte> comptesDuClient1 = new ArrayList<Compte>();
