@@ -10,20 +10,35 @@
      <ui:define name="title">CalculEmprunt</ui:define>
 	<ui:define name="content">
 	   <h:messages globalOnly="true" styleClass="RedCssClass"  />
-	    <h:form>
-	        montant: <h:inputText  id="montant" label="montant" 
+	    <h:form id="f">
+	       <h:panelGrid id="subPanel_form_emprunt" columns="3">
+	       
+	        <h:outputLabel for="montant">montant:</h:outputLabel> 
+	        <h:inputText  id="montant" label="montant" 
 	                   value="#{empruntMBean.montant}" > 
 	                      <f:validateDoubleRange minimum="0" maximum="999999"/>
-	                 </h:inputText>
-	                 <h:message styleClass="RedCssClass" for="montant" /> <br/>
-	        taux annuel (en %): <h:inputText   value="#{empruntMBean.taux}"  >
+	         </h:inputText>
+	         <h:message styleClass="RedCssClass" for="montant" />
+	         
+	        <h:outputLabel for="taux">taux annuel (en %):</h:outputLabel> 
+	        <h:inputText id="taux" label="taux"  value="#{empruntMBean.taux}"  >
 	                 <f:convertNumber maxFractionDigits="2"/>
-	            </h:inputText> <br/>
-	        nbMois: <h:inputText   value="#{empruntMBean.nbMois}" required="true" /> <br/>
+	        </h:inputText> 
+	        <h:message styleClass="RedCssClass" for="taux" />
+	        
+	        <h:outputLabel for="nbMois">nbMois:</h:outputLabel> 
+	        <h:inputText id="nbMois" value="#{empruntMBean.nbMois}" 
+	                     label="nbMois" required="true" /> 
+	        <h:message styleClass="RedCssClass" for="nbMois" />
+	        
+	        <h:outputLabel></h:outputLabel>
 	        <h:commandButton value="calculer mensualite" 
 	                         action="#{empruntMBean.calculer}"/>
+	        <h:outputLabel></h:outputLabel>
+	                         
+	       </h:panelGrid>
 	    </h:form> 
-    mensualite:  <h:outputText   value="#{empruntMBean.mensualite}"  /> 
+    <!-- mensualite:  <h:outputText   value="#{empruntMBean.mensualite}"  /> -->
 	</ui:define>
 </ui:composition>
 
