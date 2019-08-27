@@ -8,11 +8,17 @@
     <navigation-rule>
        <from-view-id>/emprunt.xhtml</from-view-id>
        
+       <!-- navigation-case par defaut sans redirect (performant) -->
+       <!-- avec redirect , URL actualisée après navigation
+            mais double requête envoyée par navigateur et donc
+            mauvaise performance et quelquefois besoin de @SessionScoped -->
+       <!-- 
 		<navigation-case>
 			<from-outcome>resEmprunt</from-outcome>
 			<to-view-id>/resEmprunt.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
+	   -->
 	</navigation-rule>
 
 </faces-config>

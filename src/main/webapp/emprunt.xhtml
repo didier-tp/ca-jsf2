@@ -5,39 +5,27 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
-  <link rel="stylesheet" href="css/styles.css" type="text/css" />
-</head>
-<body>
-  <f:view>
-    <h:messages globalOnly="true" styleClass="RedCssClass"  />
-    <h:form>
-        montant: <h:inputText  id="montant" label="montant" 
-                   value="#{empruntMBean.montant}" > 
-                      <f:validateDoubleRange minimum="0" maximum="999999"/>
-                 </h:inputText>
-                 <h:message styleClass="RedCssClass" for="montant" /> <br/>
-        taux annuel (en %): <h:inputText   value="#{empruntMBean.taux}"  /> <br/>
-        nbMois: <h:inputText   value="#{empruntMBean.nbMois}" required="true" /> <br/>
-        <h:commandButton value="calculer mensualite" 
-                         action="#{empruntMBean.calculer}"/>
-    </h:form> 
-    mensualite:  <h:outputText   value="#{empruntMBean.mensualite}"  /> 
-   </f:view>   
-</body>
 
-
-<!-- 
-<ui:composition template="">
-	<ui:define name="header">
-	    Add your header here or delete to use the default
-	</ui:define>
+<ui:composition template="templates/common.xhtml">
+	<ui:define name="header">Calcul Emprunt</ui:define>
 	<ui:define name="content">
-	    Add your content here or delete to use the default
+	   <h:messages globalOnly="true" styleClass="RedCssClass"  />
+	    <h:form>
+	        montant: <h:inputText  id="montant" label="montant" 
+	                   value="#{empruntMBean.montant}" > 
+	                      <f:validateDoubleRange minimum="0" maximum="999999"/>
+	                 </h:inputText>
+	                 <h:message styleClass="RedCssClass" for="montant" /> <br/>
+	        taux annuel (en %): <h:inputText   value="#{empruntMBean.taux}"  >
+	                 <f:convertNumber maxFractionDigits="2"/>
+	            </h:inputText> <br/>
+	        nbMois: <h:inputText   value="#{empruntMBean.nbMois}" required="true" /> <br/>
+	        <h:commandButton value="calculer mensualite" 
+	                         action="#{empruntMBean.calculer}"/>
+	    </h:form> 
+    mensualite:  <h:outputText   value="#{empruntMBean.mensualite}"  /> 
 	</ui:define>
-	<ui:define name="footer">
-	    Add your footer here or delete to use the default
-	</ui:define>
+	<ui:define name="footer">pied de page </ui:define>
 </ui:composition>
--->
+
 </html>

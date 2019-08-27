@@ -26,7 +26,10 @@ public class EmpruntMBean {
 			return null;
 		}
 		double tauxMensuel = (taux / 100) / 12;
-		this.mensualite = 
+		if(taux==0)
+			this.mensualite = montant / nbMois;
+		else
+		   this.mensualite = 
 				(this.montant * tauxMensuel) / (1 - Math.pow(1.0+tauxMensuel,-this.nbMois));
 		suite="resEmprunt"; //pour rediriger (par defaut) vers resEmprunt.xhtml
 		return suite; //null (rester sur meme page) ou "pageXy" pour naviguer 
