@@ -12,4 +12,14 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern> <!-- /faces/* ou bien *.jsf ou *.xhtml -->
   </servlet-mapping>
+  
+  <context-param>
+<param-name>facelets.REFRESH_PERIOD</param-name>
+<param-value>2</param-value>
+</context-param>
+<context-param>
+<param-name>facelets.DEVELOPMENT</param-name>
+<param-value>true</param-value>
+</context-param>
+
 </web-app>
