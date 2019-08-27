@@ -7,11 +7,27 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="templates/common.xhtml">
-	<ui:define name="title">Resultat calcul emprunt</ui:define>
+	<ui:define name="title">Client</ui:define>
 	<ui:define name="content">
-	   mensualite:  <h:outputText   value="#{empruntMBean.mensualite}"  >
-        <f:convertNumber maxFractionDigits="2"/>
-    </h:outputText> 
+	  client numero <b><h:outputText value="#{clientComptesMBean.client.numero}" /></b> <br/>
+	  <b><h:outputText value="#{clientComptesMBean.client.prenom}" /> &nbsp;
+	     <h:outputText value="#{clientComptesMBean.client.nom}" />
+	  </b>
+	  <h3> comptes du client:</h3>
+	  <h:dataTable border="1" value="#{clientComptesMBean.comptes}" var="c">
+	      <h:column>
+	           <f:facet name="header">numero</f:facet>
+	           <h:outputText value="#{c.numero}" />
+	      </h:column>
+	      <h:column>
+	           <f:facet name="header">label</f:facet>
+	           <h:outputText value="#{c.label}" />
+	      </h:column>
+	       <h:column>
+	           <f:facet name="header">solde</f:facet>
+	           <h:outputText value="#{c.solde}" />
+	      </h:column>
+	  </h:dataTable> 
 	</ui:define>
 </ui:composition>
 
