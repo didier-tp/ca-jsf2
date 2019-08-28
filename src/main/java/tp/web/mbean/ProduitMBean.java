@@ -19,6 +19,15 @@ public class ProduitMBean {
 	private List<String> categories; //liste de categorie (à choisir)
 	private String categorie;//catégorie selectionnée
 	private List<Produit> produits = new ArrayList<Produit>(); //liste des produits de la catégorie sélectionnée
+	private Long idProduit; //id produit selectionné
+	public Long getIdProduit() {
+		return idProduit;
+	}
+
+	public void setIdProduit(Long idProduit) {
+		this.idProduit = idProduit;
+	}
+
 	private Produit produit; //produit sélectionné à détailler
 	
 	//@Autowired
@@ -32,7 +41,6 @@ public class ProduitMBean {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("init() appelee");
 		this.categories = serviceProduits.getCategories();
 		System.out.println("categories="+categories);
 	}
@@ -40,6 +48,16 @@ public class ProduitMBean {
 	public void onCategorieChange(ValueChangeEvent event){
         this.categorie = (String) event.getNewValue();
         this.produits = serviceProduits.getProduitsCategorie(categorie);
+	}
+	
+	public void onProduitChange(ValueChangeEvent event){
+        this.idProduit = (Long) event.getNewValue();
+        System.out.println("id produit selectionne:" + idProduit);
+        for(Produit p : this.produits) {
+        	if(p.getNumero() == this.idProduit) {
+        		this.produit = p; break;
+        	}
+        }
 	}
 
 	public List<String> getCategories() {

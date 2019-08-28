@@ -11,32 +11,39 @@
 	<ui:define name="content">
 	<h:messages globalOnly="true" styleClass="RedCssClass"  />
 	
-	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
-	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
-	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
-	
+		
 	    <h:form id="f">
 	       <h:panelGrid id="subPanel_form_produits" columns="3">
 	       
 	        <h:outputLabel for="categorie">categorie:</h:outputLabel> 
 	        <h:selectOneListbox  id="categorie"  
 	                   value="#{produitMBean.categorie}"
-	                   onclick="submit()"
 	                   valueChangeListener="#{produitMBean.onCategorieChange}" > 
 	              <f:selectItems value="#{produitMBean.categories}" var="c"
-	                        itemValue="#{c}" itemLabel="#{c}" />       
+	                        itemValue="#{c}" itemLabel="#{c}" />   
+	              <f:ajax event="change" render="idListBoxProduits" />    
 	         </h:selectOneListbox >
 	         <h:outputLabel></h:outputLabel>
 	         
 	         
 	         <h:outputLabel for="produits">produit:</h:outputLabel> 
-	        <h:selectOneListbox  id="ptoduits"  
-	                   value="#{produitMBean.produit}" > 
+	        <h:selectOneListbox  id="idListBoxProduits"  
+	                   value="#{produitMBean.idProduit}" 
+	                   valueChangeListener="#{produitMBean.onProduitChange}"> 
 	              <f:selectItems value="#{produitMBean.produits}" var="p"
-	                        itemValue="#{p}" itemLabel="#{p.label}" />       
+	                        itemValue="#{p.numero}" itemLabel="#{p.label}" /> 
+	              <f:ajax event="change" render="idPanelProduit" />       
 	         </h:selectOneListbox >
 	         <h:outputLabel></h:outputLabel>
 	         
+	          <h:outputLabel>details produit:</h:outputLabel>
+	          <h:panelGroup id="idPanelProduit">
+	                <h:outputText id="idNumProd" value="#{produitMBean.produit.numero}" /> &nbsp;
+	                <h:outputText id="idLabelProd" value="#{produitMBean.produit.label}" />&nbsp;
+	                <h:outputText id="idPrixProd" value="#{produitMBean.produit.prix}" />&nbsp;
+	                <h:outputText id="idCarProd" value="#{produitMBean.produit.caracteristiques}" />
+	          </h:panelGroup>
+	           <h:outputLabel></h:outputLabel>
 	          
 	       </h:panelGrid>
 	    </h:form>  
