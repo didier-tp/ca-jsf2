@@ -23,7 +23,7 @@ public class VirementMBean {
 	public String virement() {
 		String suite = null;
 		//deleguer le virement au service
-		Long numClient = clientComptesMBean.getNumClient();
+		Long numClient = clientComptesMBean.getLogin().getNumClient();
 		serviceComptes.effectuerVirementInterne(numClient, montant, numCptDeb, numCptCred);
 		//si ok , réactualiser liste des comptes dans clientComptesMBean
 		clientComptesMBean.setComptes(serviceComptes.getComptesClient(numClient));

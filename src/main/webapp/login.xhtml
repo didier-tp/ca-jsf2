@@ -15,21 +15,22 @@
 	       
 	        <h:outputLabel for="numClient">num client:</h:outputLabel> 
 	        <h:inputText  id="numClient" label="numClient" 
-	                   value="#{clientComptesMBean.numClient}" > 
-	                      <f:validateDoubleRange minimum="0" maximum="999999"/>
+	                   value="#{clientComptesMBean.login.numClient}" > 
+	                     <!--  <f:validateDoubleRange minimum="0" maximum="999999"/>  -->
 	         </h:inputText>
 	         <h:message styleClass="RedCssClass" for="numClient" />
 	         
 	        <h:outputLabel for="pwd">password:</h:outputLabel> 
-	        <h:inputSecret id="pwd" label="password"  value="#{clientComptesMBean.password}"  >
-	                 <f:validateLength  minimum="4"/>
+	        <h:inputSecret id="pwd" label="password"  
+	                   value="#{clientComptesMBean.login.password}"  >
+	                <!--  <f:validateLength  minimum="4"/> -->
 	        </h:inputSecret> 
 	        <h:message styleClass="RedCssClass" for="pwd" />
 	        
 	       
 	        <h:outputLabel></h:outputLabel>
 	        <h:commandButton value="login" 
-	                         action="#{clientComptesMBean.login}"/>
+	                         action="#{clientComptesMBean.doLogin}"/>
 	        <h:outputLabel></h:outputLabel>
 	                         
 	       </h:panelGrid>

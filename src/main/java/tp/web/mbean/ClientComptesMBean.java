@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import tp.web.data.Client;
 import tp.web.data.Compte;
+import tp.web.data.Login;
 import tp.web.service.ServiceComptes;
 
 @ManagedBean //ou @Component si spring
@@ -20,20 +21,22 @@ public class ClientComptesMBean {
 	@ManagedProperty("#{serviceComptes}")//equivalent jsf de @Autowired de Spring
 	private ServiceComptes serviceComptes; //+get/set attendu par jsf
 	
-	private Long numClient ; // à saisir
-	private String password; // à saisir
+	//private Long numClient ; // ancienne version
+	//private String password; // ancienne version
+	
+	private Login login = new Login(); //avec sous parties .numClient et .password
 	
 	private Client client; //à afficher
 	private List<Compte> comptes; //à afficher sous forme de tableau
 	
-	public String login() {
+	public String doLogin() {
 		String suite=null;
-		if(! this.serviceComptes.verifPassword(numClient, password)) {
+		if(! this.serviceComptes.verifPassword(login.getNumClient(), login.getPassword())) {
 			FacesContext.getCurrentInstance().addMessage(null, 
 					new FacesMessage("echec authentification"));
 		}else {
-			this.client = serviceComptes.getInfoClient(numClient);
-			this.comptes = serviceComptes.getComptesClient(numClient);
+			this.client = serviceComptes.getInfoClient(login.getNumClient());
+			this.comptes = serviceComptes.getComptesClient(login.getNumClient());
 			//+ eventuel try/catch , + eventuel if(...)
 			suite = "comptes"; //pour demander à naviguer vers comptes.xhtml (navig par defaut JSF2)
 		}
@@ -48,21 +51,7 @@ public class ClientComptesMBean {
 		this.serviceComptes = serviceComptes;
 	}
 
-	public Long getNumClient() {
-		return numClient;
-	}
 
-	public void setNumClient(Long numClient) {
-		this.numClient = numClient;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public Client getClient() {
 		return client;
@@ -78,6 +67,14 @@ public class ClientComptesMBean {
 
 	public void setComptes(List<Compte> comptes) {
 		this.comptes = comptes;
+	}
+
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 	
 	
