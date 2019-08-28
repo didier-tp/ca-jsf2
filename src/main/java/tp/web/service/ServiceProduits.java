@@ -21,6 +21,8 @@ public class ServiceProduits {
 	
 	public ServiceProduits() {
 		categories.add("CD"); categories.add("DVD"); categories.add("Divers");
+		categories.add("C1"); categories.add("C2"); categories.add("C3");
+		
 		List<Produit> produitsCD = new ArrayList<Produit>();
 		produitsCD.add(new Produit(11L,"CD 1", 14.50 , "CD Alain Souchon"));
 		produitsCD.add(new Produit(12L,"CD 2", 8.50 , "CD Xyz"));

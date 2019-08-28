@@ -1,6 +1,7 @@
 package tp.web.mbean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,24 @@ public class ProduitMBean {
 	private List<Produit> produits = new ArrayList<Produit>(); //liste des produits de la catégorie sélectionnée
 	private Long idProduit; //id produit selectionné (avec get/Set)
 	
+	private Date date;//java.util.Date; (avec get/set)
+	
+	public List<String> completeCategorie(String cat){
+		List<String> suggestions = new ArrayList<String>();
+		for(String s : categories){
+			if(s.toLowerCase().startsWith(cat.toLowerCase()))
+			suggestions.add(s);
+			} 
+		return suggestions;
+	}
+	
+	//appelé par commandButton de testPrimefaces.xhtml :
+	public String recupChoix() {
+		System.out.println("date choisie :" + date);
+		System.out.println("categorie choisie :" + categorie);
+		return null;//rester sur meme page
+	}
+		
 
 	private Produit produit; //produit sélectionné à détailler
 	
@@ -105,6 +124,14 @@ public class ProduitMBean {
 
 	public void setIdProduit(Long idProduit) {
 		this.idProduit = idProduit;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 }
