@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="templates/common.xhtml">
+	<ui:define name="title">produits</ui:define>
+	<ui:define name="content">
+	<h:messages globalOnly="true" styleClass="RedCssClass"  />
+	
+	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
+	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
+	**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>**<br/>
+	
+	    <h:form id="f">
+	       <h:panelGrid id="subPanel_form_produits" columns="3">
+	       
+	        <h:outputLabel for="categorie">categorie:</h:outputLabel> 
+	        <h:selectOneListbox  id="categorie"  
+	                   value="#{produitMBean.categorie}"
+	                   onclick="submit()"
+	                   valueChangeListener="#{produitMBean.onCategorieChange}" > 
+	              <f:selectItems value="#{produitMBean.categories}" var="c"
+	                        itemValue="#{c}" itemLabel="#{c}" />       
+	         </h:selectOneListbox >
+	         <h:outputLabel></h:outputLabel>
+	         
+	         
+	         <h:outputLabel for="produits">produit:</h:outputLabel> 
+	        <h:selectOneListbox  id="ptoduits"  
+	                   value="#{produitMBean.produit}" > 
+	              <f:selectItems value="#{produitMBean.produits}" var="p"
+	                        itemValue="#{p}" itemLabel="#{p.label}" />       
+	         </h:selectOneListbox >
+	         <h:outputLabel></h:outputLabel>
+	         
+	          
+	       </h:panelGrid>
+	    </h:form>  
+	</ui:define>
+</ui:composition>
+
+</html>
