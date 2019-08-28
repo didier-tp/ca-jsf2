@@ -1,6 +1,8 @@
 package tp.web.data;
 
-public class Produit {
+import java.io.Serializable;
+
+public class Produit implements Serializable {
 	
 	private Long numero;
 	private String label;

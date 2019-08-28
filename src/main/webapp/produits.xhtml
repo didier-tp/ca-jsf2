@@ -21,7 +21,7 @@
 	                   valueChangeListener="#{produitMBean.onCategorieChange}" > 
 	              <f:selectItems value="#{produitMBean.categories}" var="c"
 	                        itemValue="#{c}" itemLabel="#{c}" />   
-	              <f:ajax event="change" render="idListBoxProduits" />    
+	              <f:ajax event="change" render="idListBoxProduits idPanelEnglobantProduit" />    
 	         </h:selectOneListbox >
 	         <h:outputLabel></h:outputLabel>
 	         
@@ -32,18 +32,22 @@
 	                   valueChangeListener="#{produitMBean.onProduitChange}"> 
 	              <f:selectItems value="#{produitMBean.produits}" var="p"
 	                        itemValue="#{p.numero}" itemLabel="#{p.label}" /> 
-	              <f:ajax event="change" render="idPanelProduit" />       
+	              <f:ajax event="change" render="idPanelEnglobantProduit" />       
 	         </h:selectOneListbox >
 	         <h:outputLabel></h:outputLabel>
 	         
-	          <h:outputLabel>details produit:</h:outputLabel>
-	          <h:panelGroup id="idPanelProduit">
-	                <h:outputText id="idNumProd" value="#{produitMBean.produit.numero}" /> &nbsp;
-	                <h:outputText id="idLabelProd" value="#{produitMBean.produit.label}" />&nbsp;
-	                <h:outputText id="idPrixProd" value="#{produitMBean.produit.prix}" />&nbsp;
-	                <h:outputText id="idCarProd" value="#{produitMBean.produit.caracteristiques}" />
-	          </h:panelGroup>
-	           <h:outputLabel></h:outputLabel>
+	         <h:outputLabel></h:outputLabel>
+	         <h:panelGroup id="idPanelEnglobantProduit">
+		          <h:panelGroup id="idPanelProduit"
+		                 rendered="#{produitMBean.produit != null}">
+		                  details produit:
+		                <h:outputText id="idNumProd" value="#{produitMBean.produit.numero}" /> &nbsp;
+		                <h:outputText id="idLabelProd" value="#{produitMBean.produit.label}" />&nbsp;
+		                <h:outputText id="idPrixProd" value="#{produitMBean.produit.prix}" />&nbsp;
+		                <h:outputText id="idCarProd" value="#{produitMBean.produit.caracteristiques}" />
+		          </h:panelGroup>
+	           </h:panelGroup>
+	            <h:outputLabel></h:outputLabel>
 	          
 	       </h:panelGrid>
 	    </h:form>  

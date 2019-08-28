@@ -13,20 +13,14 @@ import tp.web.data.Produit;
 import tp.web.service.ServiceProduits;
 
 @ManagedBean
-@SessionScoped
+@SessionScoped 
 public class ProduitMBean {
 	
 	private List<String> categories; //liste de categorie (à choisir)
 	private String categorie;//catégorie selectionnée
 	private List<Produit> produits = new ArrayList<Produit>(); //liste des produits de la catégorie sélectionnée
-	private Long idProduit; //id produit selectionné
-	public Long getIdProduit() {
-		return idProduit;
-	}
-
-	public void setIdProduit(Long idProduit) {
-		this.idProduit = idProduit;
-	}
+	private Long idProduit; //id produit selectionné (avec get/Set)
+	
 
 	private Produit produit; //produit sélectionné à détailler
 	
@@ -48,9 +42,12 @@ public class ProduitMBean {
 	public void onCategorieChange(ValueChangeEvent event){
         this.categorie = (String) event.getNewValue();
         this.produits = serviceProduits.getProduitsCategorie(categorie);
+        this.idProduit = null;
+        this.produit = null;
 	}
 	
 	public void onProduitChange(ValueChangeEvent event){
+		
         this.idProduit = (Long) event.getNewValue();
         System.out.println("id produit selectionne:" + idProduit);
         for(Produit p : this.produits) {
@@ -58,6 +55,8 @@ public class ProduitMBean {
         		this.produit = p; break;
         	}
         }
+		//this.produit = (Produit) event.getNewValue();
+		//System.out.println("Produit selectionne:" + produit);
 	}
 
 	public List<String> getCategories() {
@@ -100,6 +99,12 @@ public class ProduitMBean {
 		this.serviceProduits = serviceProduits;
 	}
 	
-	
+	public Long getIdProduit() {
+		return idProduit;
+	}
+
+	public void setIdProduit(Long idProduit) {
+		this.idProduit = idProduit;
+	}
 	
 }
